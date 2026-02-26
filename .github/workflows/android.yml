@@ -5,13 +5,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:  # <-- Corrigido: Agora com 2 espaços de recuo
+  build:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: set up JDK 17
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
@@ -21,12 +22,13 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Build with Gradle
-      # Corrigido: Apenas um 'run' e com flags de segurança para CI
-      run: ./gradlew assembleDebug --no-daemon --console=plain --info
+    - name: Build with Gradle (Debug)
+      run: ./gradlew assembleDebug --no-daemon --parallel --build-cache --info
 
     - name: Upload APK
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: app-debug
         path: app/build/outputs/apk/debug/app-debug.apk
+        retention-days: 5
