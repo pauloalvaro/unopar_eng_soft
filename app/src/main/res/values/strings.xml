@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Lara</string>
+    <string name="config_title">Configuração Técnica</string>
+    <string name="api_key_hint">Sua GEMINI_API_KEY</string>
+    <string name="save_button">Começar Jornada</string>
+    <string name="onboarding_title">Olá, eu sou a Lara</string>
+    <string name="onboarding_subtitle">Vamos organizar sua casa com leveza?</string>
+    <string name="task_completed_toast">Você é incrível!</string>
+    <string name="dashboard_title">Foco de Hoje</string>
+    <string name="tada_list_title">Lista Ta-Da!</string>
+    <string name="imprevisto_button">Algo mudou?</string>
+    <string name="imprevisto_hint">O que aconteceu?</string>
+    <string name="imprevisto_submit">Reorganizar com carinho</string>
+    <string name="pote_conquistas_label">Seu Pote de Conquistas</string>
+    <string name="success_message">Tudo em ordem por aqui!</string>
+    <string name="loading_gemini">Lara está pensando na melhor rotina para você…</string>
+</resources>
