@@ -1,1 +1,36 @@
-name: Android CI\n\non: [push, pull_request]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout Code\n        uses: actions/checkout@v2\n\n      - name: Setup JDK\n        uses: actions/setup-java@v1\n        with:\n          java-version: '11'\n\n      - name: Cache Gradle dependencies\n        uses: actions/cache@v2\n        with:\n          path: ~/.gradle/caches/**/*\n          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}\n          restore-keys: ${{ runner.os }}-gradle-\n\n      - name: Lint\n        run: ./gradlew lint\n\n      - name: Run Unit Tests\n        run: ./gradlew test\n\n      - name: Build\n        run: ./gradlew build\n\n      - name: Archive Build Artifacts\n        uses: actions/upload-artifact@v2\n        with:\n          name: android-build-artifacts\n          path: app/build/outputs/apk/**/*\n
+name: Android CI
+
+on: [push, pull_request]
+
+jobs:
+build:
+runs-on: ubuntu-latest
+steps:
+- name: Checkout Code
+uses: actions/checkout@v2
+
+      - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+      java-version: '11'
+      - name: Cache Gradle dependencies
+      uses: actions/cache@v2
+      with:
+      path: ~/.gradle/caches/**/*
+      key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+      restore-keys: ${{ runner.os }}-gradle-
+      
+      - name: Lint
+      run: ./gradlew lint
+      
+      - name: Run Unit Tests
+      run: ./gradlew test
+      
+      - name: Build
+      run: ./gradlew build
+      
+      - name: Archive Build Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+      name: android-build-artifacts
+      path: app/build/outputs/apk/**/*
