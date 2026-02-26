@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build:  # <-- Corrigido: Agora com 2 espaços de recuo
     runs-on: ubuntu-latest
 
     steps:
@@ -22,12 +22,11 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build with Gradle
+      # Corrigido: Apenas um 'run' e com flags de segurança para CI
       run: ./gradlew assembleDebug --no-daemon --console=plain --info
 
-
-    - name: Upload APK test
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: app-debug
         path: app/build/outputs/apk/debug/app-debug.apk
-
