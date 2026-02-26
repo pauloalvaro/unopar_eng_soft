@@ -3,20 +3,21 @@ name: Android CI
 on: [push, pull_request]
 
 jobs:
-  build: # Corrigido: Indentação de 2 espaços para evitar erro de sintaxe
+  build: # Corrigido: Indentação de 2 espaços para evitar o erro de sintaxe
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2 # Conforme solicitado (versão antiga)
+        uses: actions/checkout@v3 # Atualizado para v3
 
       - name: Setup JDK
-        uses: actions/setup-java@v1 # Conforme solicitado (versão antiga)
+        uses: actions/setup-java@v3 # Atualizado para v3
         with:
-          java-version: '11' # Versão antiga solicitada
+          java-version: '11' # Versão solicitada
+          [span_1](start_span)distribution: 'temurin' # Distribuição padrão estável[span_1](end_span)
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v2 # Conforme solicitado (versão antiga)
+        uses: actions/cache@v3 # Atualizado para v3
         with:
           path: ~/.gradle/caches/
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
@@ -27,18 +28,18 @@ jobs:
         run: chmod +x gradlew
 
       - name: Lint
-        # Adicionado --no-daemon para evitar o travamento de 4 horas
+        # Flags essenciais para evitar o hang de 4 horas
         run: ./gradlew lint --no-daemon --console=plain
 
       - name: Run Unit Tests
         run: ./gradlew test --no-daemon --console=plain
 
       - name: Build
-        # assembleDebug gera o APK para testes
+        # assembleDebug é o comando correto para gerar o APK de teste
         run: ./gradlew assembleDebug --no-daemon --console=plain
 
       - name: Archive Build Artifacts
-        uses: actions/upload-artifact@v2 # Conforme solicitado (versão antiga)
+        uses: actions/upload-artifact@v3 # Atualizado para v3
         with:
           name: android-build-artifacts
           path: app/build/outputs/apk/
