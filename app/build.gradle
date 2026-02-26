@@ -38,7 +38,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.4'
+        kotlinCompilerExtensionVersion '1.5.15'
     }
     packagingOptions {
         resources {
@@ -65,7 +65,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 
     // Gemini SDK
-    implementation "com.google.ai.client.generativeai:generativeai:0.2.0"
+    implementation "com.google.ai.client.generativeai:generativeai:latest.version"
 
     // Security (EncryptedSharedPreferences)
     implementation "androidx.security:security-crypto:1.1.0-alpha06"
